@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+</head>
+
+<body>
+    <div style="text-align: right;">
+        <a href="/destroy_session">Log Out</a>
+    </div>
+    <h1>Welcome, {{User_logged_in.first_name}}!</h1>
+    <form action="/jobs/new" method="POST" class="form">
+        {% csrf_token %}
+        <button>New job!</button>
+    </form>
+
+    <p>Everyone's jobs: </p>
+
+
+    <table>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th style="text-align: left;">Actions</th>
+
+        </tr>
+
+
+        {% for job in all_jobs %}
+        <tr>
+            <td>{{job.title}} | </td>
+            <td>{{job.location}} | </td>
+
+            
+            <td><a href="/jobs/{{job.id}}">View</a> |
+                <!-- <a href="/jobs/edit/{{job.id}}">{{User_logged_in.jobs.edit}}</a> -->| 
+                
+            
+            
+            {% if job.user.first_name == User_logged_in.first_name%}
+            <a href="/job/{{job.id}}/delete">delete</a>
+        
+            <a href="jobs/edit/{{job.id}}/">Edit</a>
+          
+            {%endif%}
+            
+                
+            </td>
+
+          
+            <!-- <td><a href="/authors/{{author.id}}">view</a></td> -->
+
+
+
+            {% endfor %}
+            
+        </tr>
+        
+
+
+    </table>
+<!--
+    {% for i in User_logged_in.jobs.all %}
+    <p>{{i}}</p>
+    <p>{{i.title}} <a href="/jobs/edit/{{i.id}}">{{i.edit}}</a> yuh</p>
+    {% endfor %}
+
+
+    <p>{{User_logged_in.first_name}} last job: {{User_logged_in.jobs.last.title}} |
+        {{User_logged_in.jobs.last.location}} <a href='/jobs/edit/{{job.id}}'>{{User_logged_in.jobs.last.edit}}</a></p>
+
+
+
+
+    <hr>
+    {%for job in all_jobs%}
+    {%for i in User_logged_in.jobs.all%}
+    <p>{{job.title}} {{job.location}}</p>
+    <p>Owner: {{User_logged_in.first_name}} ID: {{i.id}} job: {{i.title}} | {{i.location}} <a
+            href='/jobs/edit/{{i.id}}'>{{i.edit}}</a></p>
+    <hr>
+    {% endfor %}
+
+    {%endfor%}
+-->
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit this job</title>
+</head>
+<body>
+    <h1>Hello {{user_logged.first_name}}! Let's edit your job!</h1>
+    <p style="text-align: right;"><a href="/destroy_session">Logout</a></p>
+    
+    <form action="/jobs/edit/{{job.id}}/complete" method="POST" class="form">
+        {% csrf_token %}
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" placeholder="{{job.title}}"> <br>
+        
+        <!--CHECK IF REQUIRED FIELD WORKS-->
+
+        <label for="location">Location</label>
+        <input required type="text" name="location" id="location" placeholder="{{job.location}}"> <br>
+
+        <label style="vertical-align: top;" for="description">Description</label>
+        <textarea name="desc" id="desc" cols="20" rows="1" placeholder="{{job.description}}"></textarea> <br>
+
+        <input type="hidden" name="UserID" value="{{user_logged.id}}">
+        <button >Submit</button>
+
+    </form>
+
+
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

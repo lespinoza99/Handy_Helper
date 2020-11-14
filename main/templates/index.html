@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form action="/new_user" method="POST" class="form">
+        {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" id="first_name"> <br>
+
+        <label for="last_name">Last Name</label>
+        <input style="margin-top: 15px;" type="text" name="last_name" id="last_name"><br>
+
+        <label style="margin-right: 33px;"  for="email">Email</label>
+        <input style="margin-top: 15px;" type="email" name="email" id="email"><br>
+
+        <label style="margin-right: 10px;" for="password">Password</label>
+        <input style="margin-top: 15px;" type="password" name="password" id="password"> <br>
+
+        <label for="confirm_password">Confirm Password</label>
+        <input style="margin-top: 15px;" type="password" name="confirm_password" id="confirm_password"> <br>
+
+        <button style="margin-top: 15px;">Register</button>
+
+    </form>
+
+    <h1>Login</h1>
+    <form action="/login" method="POST" class="form">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email"> <br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"> <br>
+        <button>Login</button>
+    </form>
+
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

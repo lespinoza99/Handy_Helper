@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Job!</title>
+</head>
+<style>
+    a:visited {
+        color: black;
+    }
+</style>
+
+<body>
+    <H1>Hello {{user_logged.first_name}}! Create a job!</H1>
+
+    <form action="/jobs/create" method="POST" class="form">
+        {% csrf_token %}
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title"> <br>
+        
+        <!--CHECK IF REQUIRED FIELD WORKS-->
+
+        <label for="location">Location</label>
+        <input required type="text" name="location" id="location"> <br>
+
+        <label style="vertical-align: top;" for="description">Description</label>
+        <textarea name="desc" id="desc" cols="20" rows="1"></textarea> <br>
+
+        <input type="hidden" name="UserID" value="{{user_logged.id}}">
+        <button >Submit</button>
+
+    </form>
+
+    <!-- <button> <a style="text-decoration: none; " href="/success">test</a></button>
+    -->
+    <form action="/success" method="POST" class="form">
+        {% csrf_token %}
+        <button>Cancel</button>
+    </form>
+</body>
+
+</html>
